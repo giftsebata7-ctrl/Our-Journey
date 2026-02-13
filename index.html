@@ -5,53 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Mama Qhawe ❤️</title>
     
-    <meta property="og:title" content="A Special Challenge for Mama Qhawe">
-    <meta property="og:description" content="Do you remember our journey? Unlock your Valentine's surprise.">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary-red: #ff4d6d; --deep-red: #c9184a; }
-        body {
-            margin: 0; font-family: 'Poppins', sans-serif;
-            background: linear-gradient(45deg, #ffafbd, #ffc3a0, #ffafbd);
-            background-size: 400% 400%; animation: gradientBG 15s ease infinite;
-            display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden;
+        :root { 
+            --velvet: #4a051c; 
+            --gold: #d4af37;
+            --cream: #fff5f7;
         }
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        
+
+        * { box-sizing: border-box; }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle, #5e0b15 0%, #2e0308 100%);
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* Ambient Rose Petals */
+        .petal {
+            position: absolute; background-color: #ff4d6d;
+            border-radius: 150% 0 150% 0; opacity: 0.6;
+            pointer-events: none; animation: fly 12s linear infinite;
+            filter: blur(1px);
+        }
+        @keyframes fly {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(50px); opacity: 0; }
+        }
+
         #game-container {
-            background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); text-align: center;
-            max-width: 500px; width: 90%; z-index: 10;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 40px 25px; border-radius: 50px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            text-align: center; max-width: 450px; width: 90%;
+            z-index: 10; color: var(--cream);
+            position: relative;
         }
 
-        h1 { font-family: 'Great Vibes', cursive; color: var(--primary-red); font-size: 3rem; margin: 10px 0; }
-        .timer { font-size: 28px; color: var(--primary-red); font-weight: bold; margin-bottom: 15px; }
+        h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--gold); margin: 10px 0; }
+        p { font-size: 1rem; line-height: 1.6; color: var(--cream); font-weight: 300; }
 
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .timer-circle {
+            font-size: 1.8rem; font-weight: 600; color: var(--gold);
+            margin-bottom: 20px; border: 2px solid var(--gold);
+            width: 70px; height: 70px; line-height: 65px;
+            border-radius: 50%; margin: 0 auto 20px auto;
+        }
+
         .btn {
-            background: var(--primary-red); color: white; border: none;
-            padding: 12px 15px; border-radius: 15px; cursor: pointer;
-            font-size: 14px; font-weight: 600; transition: 0.3s;
+            background: transparent;
+            color: var(--gold); border: 1.5px solid var(--gold);
+            padding: 15px 30px; border-radius: 10px; cursor: pointer;
+            font-size: 0.9rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 3px; transition: 0.5s;
+            margin-top: 15px; width: 100%;
         }
-        .btn:hover { background: var(--deep-red); transform: scale(1.03); }
+        .btn:hover { background: var(--gold); color: #2e0308; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
 
         #final-letter {
-            display: none; text-align: left; line-height: 1.7; color: #333;
-            max-height: 75vh; overflow-y: auto; padding: 15px; animation: slideIn 1s ease;
+            display: none; text-align: left; padding: 10px;
+            animation: fadeIn 3s ease; overflow-y: auto; max-height: 80vh;
         }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .shake { animation: shake 0.5s; }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+        .slideshow-container {
+            margin-top: 30px; border-radius: 15px; overflow: hidden;
+            border: 2px solid var(--gold); height: 300px; position: relative;
         }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .heart { position: fixed; top: -10px; font-size: 24px; animation: fall linear forwards; z-index: 1; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        .slideshow-container img { width: 100%; height: 100%; object-fit: cover; }
+
         .hidden { display: none; }
-        #music-box { position: absolute; left: -9999px; }
+        #music-box { position: absolute; visibility: hidden; }
+        
+        /* Custom scrollbar for the letter */
+        #final-letter::-webkit-scrollbar { width: 5px; }
+        #final-letter::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -60,39 +96,65 @@
 
 <div id="game-container">
     <div id="screen-intro">
-        <h1>Hey Mama Qhawe ❤️</h1>
-        <p>Think you remember our journey? Answer these 5 questions before time runs out to unlock your message.</p>
-        <button class="btn" onclick="startGame()" style="width: 100%;">I'm Ready, Gift!</button>
+        <h2 style="font-weight: 300; letter-spacing: 5px; margin-bottom: 0;">DEAREST</h2>
+        <h1>Mama Qhawe</h1>
+        <div style="height: 1px; width: 50px; background: var(--gold); margin: 20px auto;"></div>
+        <p>I’ve kept a few memories locked away. Answer these five questions to open my heart to you.</p>
+        <button class="btn" onclick="startGame()">Begin Our Story</button>
     </div>
 
     <div id="screen-game" class="hidden">
-        <div class="timer">⏳ <span id="time">8</span>s</div>
-        <h2 id="question" style="font-size: 1.2rem;">Question</h2>
+        <div class="timer-circle" id="time">08</div>
+        <h2 id="question" style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--gold);">Question</h2>
         <div class="options-grid" id="options"></div>
     </div>
 
     <div id="screen-proposal" class="hidden">
-        <h1>The Final Choice...</h1>
-        <h2 style="color: var(--primary-red);">Will you be my Valentine?</h2>
-        <div class="options-grid">
-            <button class="btn" onclick="showLetter()">YES! ❤️</button>
-            <button class="btn" onclick="showLetter()">DEFINITELY YES! ❤️</button>
-        </div>
+        <h1 style="font-size: 2.5rem;">One Last Thing...</h1>
+        <p>You remember us perfectly. But there is one question I haven't officially asked yet for this year...</p>
+        <h2 style="color: var(--gold); font-size: 1.6rem; margin: 30px 0; letter-spacing: 2px;">Will you be my Valentine?</h2>
+        <button class="btn" onclick="showLetter()">Yes, I will ❤️</button>
+        <button class="btn" onclick="showLetter()">Always Yes ❤️</button>
     </div>
 
     <div id="final-letter">
-        <h2 style="font-family: 'Great Vibes', cursive; color: var(--primary-red); text-align: center; font-size: 2.5rem; margin-top:0;">To My Mama Qhawe</h2>
-        <p>I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it. I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day.</p>
+        <h1 style="text-align: center; font-size: 2.8rem; margin-bottom: 10px;">To My Mama Qhawe</h1>
+        <p style="text-align: center; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 30px;">MUSIC: MY LOVE - MTHUNZI</p>
         
-        <p>I just wanted to take this time to say I see you, I appreciate you, and most importantly—<strong>NDOKUDA</strong>. May God bless you abundantly, just as He has been faithful in your life. I can't wait for the new chapter we have started together.</p>
+        <p>I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it.</p>
+        <p>I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day.</p>
+        <p>I just wanted to take this time to say I see you, I appreciate you, and most importantly—<strong>NDOKUDA</strong>.</p>
+        <p>May God bless you abundantly, just as He has been faithful in your life. I can't wait for the new chapter we have started together.</p>
         
-        <p style="text-align: right; font-weight: bold; font-style: italic; color: var(--deep-red); margin-top: 20px;">
-            Yours forever, <br>Gift Sebata ❤️
-        </p>
+        <h2 style="font-family: 'Great Vibes', cursive; text-align: right; color: var(--gold); font-size: 2.2rem; margin-top: 40px;">Gift Sebata</h2>
+
+        <div class="slideshow-container" id="slideshow">
+            <div class="mySlides"><img src="photo1.jpg"></div>
+            <div class="mySlides"><img src="photo2.jpg"></div>
+            <div class="mySlides"><img src="photo3.jpg"></div>
+            <div class="mySlides"><img src="photo4.jpg"></div>
+            <div class="mySlides"><img src="photo5.jpg"></div>
+        </div>
     </div>
 </div>
 
 <script>
+    // Rose Petal Animation
+    function createPetals() {
+        for (let i = 0; i < 20; i++) {
+            let petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + 'vw';
+            let size = Math.random() * 15 + 10 + 'px';
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.animationDelay = Math.random() * 12 + 's';
+            document.body.appendChild(petal);
+        }
+    }
+    createPetals();
+
+    // YouTube Audio
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -111,11 +173,11 @@
     let timeLeft = 8;
 
     const scenarios = [
-        { q: "What was the first date we went on?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
-        { q: "What was I wearing on that first date?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
-        { q: "Why were you so shy that day?", ops: ["My charm was too much", "Scared of falling in love", "You forgot how to speak", "I was too handsome"], correct: 3 },
-        { q: "What day did I propose to you?", ops: ["08 June 2023", "12 October 1995", "25 December 2023", "1 April 2023"], correct: 3 },
-        { q: "Who is the most beautiful woman in the whole world?", ops: ["Tapiwanashe Mutumhe", "Rumbidzo Mutumhe", "Mama Qhawe", "Mrs Sebata JNR"], correct: 3 }
+        { q: "Where was our very first date?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
+        { q: "What was I wearing that day?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
+        { q: "Why were you so shy?", ops: ["My charm was too much", "I was too handsome", "You forgot how to speak", "All of the above"], correct: "ANY" },
+        { q: "What day did I propose to you?", ops: ["08 June 2023", "25 December 2023", "12 October 1995", "1 April 2023"], correct: 3 },
+        { q: "The most beautiful woman?", ops: ["Tapiwanashe Mutumhe", "Rumbidzo Mutumhe", "Mama Qhawe", "Mrs Sebata JNR"], correct: "ANY" }
     ];
 
     function startGame() {
@@ -137,7 +199,16 @@
                 const b = document.createElement('button');
                 b.className = 'btn';
                 b.innerText = opt;
-                b.onclick = () => handleChoice(index === data.correct);
+                b.onclick = () => {
+                    if (data.correct === "ANY" || index === data.correct) {
+                        currentScenario++;
+                        loadQuestion();
+                    } else {
+                        document.getElementById('game-container').animate([
+                            { transform: 'translateX(0)' }, { transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(0)' }
+                        ], { duration: 300 });
+                    }
+                };
                 optionsDiv.appendChild(b);
             });
             startTimer();
@@ -151,19 +222,8 @@
         timer = setInterval(() => {
             timeLeft--;
             document.getElementById('time').innerText = timeLeft;
-            if (timeLeft <= 0) handleChoice(false);
+            if (timeLeft <= 0) { currentScenario++; loadQuestion(); }
         }, 1000);
-    }
-
-    function handleChoice(isCorrect) {
-        if (!isCorrect) {
-            const container = document.getElementById('game-container');
-            container.classList.add('shake');
-            setTimeout(() => container.classList.remove('shake'), 500);
-        } else {
-            currentScenario++;
-            loadQuestion();
-        }
     }
 
     function showProposal() {
@@ -175,17 +235,17 @@
     function showLetter() {
         document.getElementById('screen-proposal').classList.add('hidden');
         document.getElementById('final-letter').style.display = 'block';
-        document.body.style.background = "#ff4d6d";
-        setInterval(createHeart, 300);
+        showSlides();
     }
 
-    function createHeart() {
-        const heart = document.createElement('div');
-        heart.className = 'heart'; heart.innerHTML = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
+    let slideIndex = 0;
+    function showSlides() {
+        let slides = document.getElementsByClassName("mySlides");
+        for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        slides[slideIndex-1].style.display = "block";
+        setTimeout(showSlides, 3500);
     }
 </script>
 </body>
