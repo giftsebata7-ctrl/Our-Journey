@@ -74,7 +74,6 @@
 
         .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
 
-        /* Final letter container fixes */
         #final-letter {
             display: none; text-align: left; padding: 10px;
             overflow-y: auto; scrollbar-width: none;
@@ -84,7 +83,17 @@
 
         .typing-text { font-size: 1rem; line-height: 1.7; color: var(--cream); white-space: pre-wrap; }
 
-        /* Utility classes for clean transitions */
+        /* Coupon Section Styling */
+        .coupon-box {
+            display: none; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center;
+        }
+        .coupon {
+            border: 1px dashed var(--gold-static); padding: 8px; font-size: 0.7rem;
+            border-radius: 5px; cursor: pointer; transition: 0.3s;
+            color: var(--gold-static);
+        }
+        .coupon:hover { background: var(--gold-static); color: #000; }
+
         .hidden { display: none !important; }
         .visible { display: block !important; }
         
@@ -118,7 +127,7 @@
         <div class="timer-circle" id="time">08</div>
         <p id="retry-message" style="color: #ff4d6d; font-size: 0.8rem; font-weight: bold; min-height: 20px;"></p>
         <h2 id="question" class="shimmer" style="font-size: 2rem;">Question</h2>
-        <div class="options-grid" id="options"></div>
+        <div id="options" class="options-grid"></div>
     </div>
 
     <div id="screen-proposal" class="hidden">
@@ -133,106 +142,7 @@
         <h1 class="shimmer" style="text-align: center; width: 100%;">To My Mama Qhawe</h1>
         <div id="love-counter" style="font-size: 1.1rem; color: var(--gold-static); font-weight: 600; margin: 10px 0 20px 0; text-align: center;">Calculating...</div>
         <div id="typing-text" class="typing-text"></div>
-        <h2 class="shimmer" style="text-align: right; width: 100%; font-size: 2rem; margin-top: 30px;">Gift Sebata</h2>
-    </div>
-</div>
 
-<script>
-    // Parallax Logic
-    document.addEventListener("mousemove", (e) => {
-        const moveX = (e.clientX - window.innerWidth / 2) / 60;
-        const moveY = (e.clientY - window.innerHeight / 2) / 60;
-        document.getElementById('bg-parallax').style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-
-    // Love Counter (April 1, 2024, 10:48 AM EST)
-    const startDate = new Date("2024-04-01T10:48:00-05:00");
-    function updateCounter() {
-        const diff = new Date() - startDate;
-        const d = Math.floor(diff / 86400000);
-        const h = Math.floor((diff / 3600000) % 24);
-        const m = Math.floor((diff / 60000) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-        document.getElementById("love-counter").innerHTML = `${d} Days, ${h}h, ${m}m, ${s}s of Loving You`;
-    }
-    setInterval(updateCounter, 1000);
-
-    // YouTube Audio
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', { height: '0', width: '0', videoId: 'rtOvBOTyX00', playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': 'rtOvBOTyX00' } });
-    }
-
-    let currentStep = 0;
-    const scenarios = [
-        { q: "What was the first date we went on?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
-        { q: "What was I wearing that day?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
-        { q: "Why were you so shy?", ops: ["Charm", "Handsome", "Mute", "All the above"], correct: "ANY" },
-        { q: "What day did I propose to you?", ops: ["08 June 2023", "25 Dec 2023", "12 Oct 1995", "1 April 2023"], correct: 3 },
-        { q: "The most beautiful woman?", ops: ["Tapiwanashe", "Rumbidzo", "Mama Qhawe", "Mrs Sebata JNR"], correct: "ANY" }
-    ];
-
-    function startGame() {
-        if (player) player.playVideo();
-        transition('screen-intro', 'screen-game');
-        loadQuestion();
-    }
-
-    // Fixed Transition Function
-    function transition(from, to) {
-        document.getElementById(from).classList.replace('visible', 'hidden');
-        setTimeout(() => {
-            document.getElementById(to).classList.replace('hidden', 'visible');
-        }, 300);
-    }
-
-    function loadQuestion() {
-        let timeLeft = 8;
-        document.getElementById('time').innerText = timeLeft;
-        const data = scenarios[currentStep];
-        document.getElementById('question').innerText = data.q;
-        const optionsDiv = document.getElementById('options');
-        optionsDiv.innerHTML = '';
-        data.ops.forEach((opt, index) => {
-            const b = document.createElement('button'); b.className = 'btn'; b.innerText = opt;
-            b.onclick = () => {
-                if (data.correct === "ANY" || index === data.correct) {
-                    currentStep++;
-                    if (currentStep < scenarios.length) loadQuestion();
-                    else transition('screen-game', 'screen-proposal');
-                } else { document.getElementById('retry-message').innerText = "You are getting overfamiliarised! Try again, my love."; }
-            };
-            optionsDiv.appendChild(b);
-        });
-    }
-
-    function showLetter() {
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#ff4d6d', '#d4af37'] });
-        
-        // COMPLETELY HIDE the proposal screen to fix overlap
-        document.getElementById('screen-proposal').classList.replace('visible', 'hidden');
-        
-        setTimeout(() => {
-            document.getElementById('final-letter').classList.add('visible');
-            document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('background.jpg')";
-            document.getElementById('bg-parallax').style.backgroundImage = "url('background.jpg')";
-            typeWriter();
-        }, 300);
-    }
-
-    const message = "I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it. I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day. I just wanted to take this time to say I see you, I appreciate you, and most importantly—NDOKUDA. I can't wait for the new chapter we have started together.";
-    let charIdx = 0;
-    function typeWriter() {
-        if (charIdx < message.length) {
-            document.getElementById("typing-text").innerHTML += message.charAt(charIdx);
-            charIdx++;
-            setTimeout(typeWriter, 50);
-        }
-    }
-</script>
-</body>
-</html>
+        <div id="coupon-section" class="coupon-box">
+            <div class="coupon" onclick="alert('Redeemed: One Deep Foot Rub!')">🎟️ ONE FOOT RUB</div>
+            <div class="coupon" onclick="alert('Redeemed: A Dinner
