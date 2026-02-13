@@ -2,234 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Rumbidzo Mutumhe ❤️</title>
     
+    <meta property="og:title" content="A Special Message for Rumbidzo Mutumhe">
+    <meta property="og:description" content="Gift Sebata has a challenge for you. Do you remember our journey?">
+
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <style>
         :root { 
-            --gold: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --gold-static: #d4af37;
+            --velvet: #4a051c; 
+            --gold-grad: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --gold: #d4af37;
             --cream: #fff5f7;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        /* Custom Cursor for Desktop */
+        * { box-sizing: border-box; cursor: url('https://cur.cursors-4u.net/symbols/sym-9/sym833.cur'), auto; }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background: #2e0308;
+            background: radial-gradient(circle, #5e0b15 0%, #2e0308 100%);
             background-size: cover; background-position: center;
             overflow: hidden; display: flex; justify-content: center; align-items: center;
+            transition: background 2s ease-in-out; 
         }
 
-        /* Cinematic Vignette Spotlight */
+        /* Vignette Lighting */
         body::after {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 25%, rgba(0,0,0,0.8) 100%);
+            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.7) 100%);
             pointer-events: none; z-index: 5;
         }
 
-        #bg-parallax {
-            position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+        /* Parallax Layer */
+        #parallax-bg {
+            position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
             background-size: cover; background-position: center;
             z-index: 1; transition: transform 0.1s ease-out;
-            pointer-events: none;
         }
 
         #game-container {
             background: rgba(20, 0, 5, 0.85);
-            backdrop-filter: blur(25px); /* Blurred Glass Effect */
+            backdrop-filter: blur(25px); /* Increased Blurred Glass Effect */
             border: 3px solid transparent;
-            border-image: var(--gold) 1; /* Gold Leaf Border */
-            padding: 35px 25px; border-radius: 40px;
-            box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
-            text-align: center; max-width: 480px; width: 92%;
-            max-height: 85vh; z-index: 100; color: var(--cream);
-            position: relative;
+            border-image: var(--gold-grad) 1; /* Gold Leaf Border Look */
+            padding: 30px 25px; border-radius: 40px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            text-align: center; max-width: 500px; width: 90%;
+            max-height: 90vh; z-index: 10; color: var(--cream);
+            position: relative; display: flex; flex-direction: column; justify-content: center;
+            transition: opacity 0.5s ease;
         }
 
+        /* Gradient Text headers */
         .shimmer {
-            background: var(--gold);
+            background: var(--gold-grad);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: inline-block;
             font-family: 'Great Vibes', cursive;
         }
 
-        h1 { font-size: clamp(2.5rem, 9vw, 3.8rem); margin: 10px 0; line-height: 1.2; }
-        
+        h1 { font-size: clamp(2.5rem, 8vw, 3.5rem); margin: 10px 0; }
+        p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.6; color: var(--cream); font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+
         /* Glow Effect Timer */
         .timer-circle {
-            font-size: 1.8rem; font-weight: 600; color: var(--gold-static);
-            border: 2px solid var(--gold-static); width: 70px; height: 70px; 
-            line-height: 65px; border-radius: 50%; margin: 0 auto 15px auto;
-            box-shadow: 0 0 15px var(--gold-static), inset 0 0 10px var(--gold-static);
+            font-size: 1.8rem; font-weight: 600; color: var(--gold);
+            border: 2px solid var(--gold); width: 70px; height: 70px; 
+            line-height: 65px; border-radius: 50%; margin: 0 auto 20px auto;
+            box-shadow: 0 0 15px var(--gold), inset 0 0 10px var(--gold);
         }
 
         .btn {
-            background: transparent; color: var(--gold-static); border: 2px solid var(--gold-static);
-            padding: 16px; border-radius: 12px; cursor: pointer;
-            font-size: 0.95rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 2px; transition: 0.3s; margin-top: 15px; width: 100%;
-            z-index: 200; position: relative;
+            background: transparent; color: var(--gold); border: 1.5px solid var(--gold);
+            padding: 12px 20px; border-radius: 10px; cursor: pointer;
+            font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.5s; margin-top: 10px; width: 100%;
         }
-        .btn:hover { background: var(--gold-static); color: #2e0308; }
+        .btn:hover { background: var(--gold); color: #2e0308; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
 
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
 
-        .screen { display: none; opacity: 0; transition: opacity 0.5s ease; width: 100%; }
-        .visible { display: block; opacity: 1; }
+        /* Love Counter Styling */
+        #love-counter {
+            font-size: 0.9rem; color: var(--gold); font-weight: 600;
+            margin: 15px 0; letter-spacing: 1px;
+        }
+
+        /* Coupon Section */
+        .coupon-box { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+        .coupon { border: 1px dashed var(--gold); padding: 8px; font-size: 0.7rem; border-radius: 5px; cursor: pointer; }
+        .coupon:hover { background: var(--gold); color: #000; }
+
+        #final-letter {
+            display: none; text-align: left; padding: 5px;
+            overflow-y: auto; scrollbar-width: none;
+        }
+        #final-letter::-webkit-scrollbar { display: none; }
+
+        /* Animated SVG Heartbeat */
+        .heart-svg { width: 50px; fill: var(--gold); animation: heartBeat 1.5s infinite; margin: 0 auto; }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        .hidden { display: none !important; opacity: 0; transform: scale(0.9); transition: 0.5s; }
+        .fade-in { animation: fadeIn 2s forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         
-        #love-counter { font-size: 0.9rem; color: var(--gold-static); margin: 15px 0; font-weight: bold; text-align: center; }
-        #typing-text { font-size: 1rem; line-height: 1.7; text-align: left; overflow-y: auto; max-height: 50vh; padding-right: 5px; color: #fff; }
+        #music-box { position: absolute; visibility: hidden; }
         
-        #music-box { position: absolute; visibility: hidden; pointer-events: none; }
+        .petal {
+            position: absolute; background-color: #ff4d6d;
+            border-radius: 150% 0 150% 0; opacity: 0.6;
+            pointer-events: none; animation: fly 12s linear infinite;
+            filter: blur(1px); z-index: 6;
+        }
     </style>
 </head>
 <body>
 
 <div id="music-box"><div id="player"></div></div>
-<div id="bg-parallax"></div>
+<div id="parallax-bg"></div>
 
-<div id="game-container">
-    <div id="screen-intro" class="screen visible">
-        <h2 style="font-weight: 300; letter-spacing: 6px; font-size: 0.8rem; margin:0;">DEAREST</h2>
+<div id="game-container" class="fade-in">
+    <div id="screen-intro">
+        <h2 style="font-weight: 300; letter-spacing: 5px; margin-bottom: 0; font-size: 0.8rem;">DEAREST</h2>
         <h1 class="shimmer">Rumbidzo Mutumhe</h1>
-        <div style="height: 1px; width: 60px; background: var(--gold-static); margin: 20px auto;"></div>
-        <p>Before we celebrate our second Valentine's, answer 5 questions to open my heart.</p>
-        <button class="btn" id="main-start-btn">Open My Heart</button>
+        <div style="height: 1px; width: 50px; background: var(--gold); margin: 15px auto;"></div>
+        <p>I’ve kept a few memories locked away. Answer these five questions to open my heart to you.</p>
+        <button class="btn" onclick="startGame()">Begin Our Story</button>
     </div>
 
-    <div id="screen-game" class="screen">
+    <div id="screen-game" class="hidden">
         <div class="timer-circle" id="time">08</div>
         <p id="retry-msg" style="color: #ff4d6d; font-size: 0.8rem; font-weight: bold; min-height: 20px;"></p>
-        <h2 id="question" style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--gold-static);">Question</h2>
+        <h2 id="question" class="shimmer" style="font-size: 2rem;">Question</h2>
         <div class="options-grid" id="options"></div>
     </div>
 
-    <div id="screen-proposal" class="screen">
-        <h1 class="shimmer">One Last Choice</h1>
-        <p>Rumbidzo, will you be my Valentine?</p>
-        <button class="btn" onclick="finishStory()">Yes, I will ❤️</button>
-        <button class="btn" onclick="finishStory()">Always Yes ❤️</button>
-    </div>
-
-    <div id="screen-letter" class="screen">
-        <h1 class="shimmer" style="text-align: center; font-size: 2.5rem; width: 100%;">To My Mama Qhawe</h1>
-        <div id="love-counter">Calculating...</div>
-        <div id="typing-text"></div>
-        <h2 class="shimmer" style="text-align: right; width: 100%; margin-top: 25px; font-size: 1.8rem;">Gift Sebata</h2>
-    </div>
-</div>
-
-<script>
-    // Parallax Interaction
-    document.addEventListener("mousemove", (e) => {
-        const x = (e.clientX - window.innerWidth / 2) / 60;
-        const y = (e.clientY - window.innerHeight / 2) / 60;
-        document.getElementById('bg-parallax').style.transform = `translate(${x}px, ${y}px)`;
-    });
-
-    // Exact Love Counter (April 1, 2024, 10:48 AM EST)
-    const start = new Date("2024-04-01T10:48:00-05:00");
-    setInterval(() => {
-        const diff = new Date() - start;
-        const d = Math.floor(diff / 86400000);
-        const h = Math.floor((diff / 3600000) % 24);
-        const m = Math.floor((diff / 60000) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-        const el = document.getElementById("love-counter");
-        if(el) el.innerHTML = `${d} Days, ${h}h, ${m}m, ${s}s of Loving You`;
-    }, 1000);
-
-    // YouTube Audio Logic
-    var tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', { height: '0', width: '0', videoId: 'rtOvBOTyX00', playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'rtOvBOTyX00' }});
-    }
-
-    // Exact Game Logic & Answer Keys
-    let step = 0;
-    let timer;
-    const scenarios = [
-        { q: "What was the first date we went on?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
-        { q: "What was I wearing on that first date?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
-        { q: "Why were you so shy that day?", ops: ["My charm was too much", "I was too handsome", "You forgot how to speak", "All of the above"], correct: "ANY" },
-        { q: "What day did I propose to you?", ops: ["08 June 2023", "25 Dec 2023", "12 Oct 1995", "1 April 2023"], correct: 3 },
-        { q: "Who is the most beautiful woman?", ops: ["Tapiwanashe Mutumhe", "Rumbidzo Mutumhe", "Mama Qhawe", "Mrs Sebata JNR"], correct: "ANY" }
-    ];
-
-    function show(id) {
-        document.querySelectorAll('.screen').forEach(s => { s.classList.remove('visible'); s.style.display = 'none'; });
-        const el = document.getElementById(id);
-        el.style.display = 'block';
-        setTimeout(() => el.classList.add('visible'), 50);
-    }
-
-    // Force Start Trigger
-    document.getElementById('main-start-btn').addEventListener('click', function() {
-        if(player && player.playVideo) player.playVideo();
-        show('screen-game');
-        next();
-    });
-
-    function next() {
-        let time = 8;
-        document.getElementById('time').innerText = time;
-        const data = scenarios[step];
-        document.getElementById('question').innerText = data.q;
-        const box = document.getElementById('options');
-        box.innerHTML = '';
-        
-        data.ops.forEach((o, i) => {
-            const b = document.createElement('button');
-            b.className = 'btn'; b.innerText = o;
-            b.onclick = () => {
-                if(data.correct === "ANY" || i === data.correct) {
-                    step++;
-                    document.getElementById('retry-msg').innerText = "";
-                    if(step < scenarios.length) next();
-                    else show('screen-proposal');
-                } else {
-                    document.getElementById('game-container').animate([
-                        { transform: 'translateX(0)' }, { transform: 'translateX(-10px)' }, { transform: 'translateX(10px)' }, { transform: 'translateX(0)' }
-                    ], { duration: 300 });
-                    document.getElementById('retry-msg').innerText = "You are getting overfamiliarised! Try again, my love.";
-                }
-            };
-            box.appendChild(b);
-        });
-
-        clearInterval(timer);
-        timer = setInterval(() => {
-            time--;
-            document.getElementById('time').innerText = time;
-            if(time <= 0) { step++; if(step < scenarios.length) next(); else show('screen-proposal'); }
-        }, 1000);
-    }
-
-    function finishStory() {
-        confetti({ particleCount: 150, spread: 70, colors: ['#ff4d6d', '#d4af37'] });
-        show('screen-letter');
-        // Final background and container transparency reveal
-        document.body.style.backgroundImage = "url('background.jpg')";
-        document.getElementById('bg-parallax').style.backgroundImage = "url('background.jpg')";
-        document.getElementById('game-container').style.background = "rgba(0,0,0,0.7)";
-        
-        const msg = "I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it. I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day. I see you, I appreciate you, and most importantly—NDOKUDA. I can't wait for the new chapter we have started together.";
-        let charIdx = 0;
-        const interval = setInterval(() => {
-            document.getElementById('typing-text').innerHTML += msg.charAt(charIdx);
-            charIdx++;
-            if(charIdx >= msg.length) clearInterval(interval);
-        }, 45);
-    }
-</script>
-</body>
-</html>
+    <div id="screen-proposal" class="hidden">
+        <svg class="heart-svg" viewBox="0 0 32 32"><path d="M16
