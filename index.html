@@ -19,11 +19,13 @@
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', sans-serif;
             background: radial-gradient(circle, #5e0b15 0%, #2e0308 100%);
+            background-size: cover;
+            background-position: center;
             overflow: hidden;
             display: flex; justify-content: center; align-items: center;
+            transition: background 2s ease-in-out; /* Smooth transition for the final image */
         }
 
-        /* Ambient Rose Petals */
         .petal {
             position: absolute; background-color: #ff4d6d;
             border-radius: 150% 0 150% 0; opacity: 0.6;
@@ -38,8 +40,8 @@
         }
 
         #game-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.4); /* Slightly darker to make text pop against any background */
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(212, 175, 55, 0.3);
             padding: 40px 25px; border-radius: 50px;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
@@ -49,22 +51,19 @@
         }
 
         h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--gold); margin: 10px 0; }
-        p { font-size: 1rem; line-height: 1.6; color: var(--cream); font-weight: 300; }
+        p { font-size: 1rem; line-height: 1.6; color: var(--cream); font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 
         .timer-circle {
             font-size: 1.8rem; font-weight: 600; color: var(--gold);
-            margin-bottom: 20px; border: 2px solid var(--gold);
-            width: 70px; height: 70px; line-height: 65px;
-            border-radius: 50%; margin: 0 auto 20px auto;
+            border: 2px solid var(--gold); width: 70px; height: 70px; 
+            line-height: 65px; border-radius: 50%; margin: 0 auto 20px auto;
         }
 
         .btn {
-            background: transparent;
-            color: var(--gold); border: 1.5px solid var(--gold);
+            background: transparent; color: var(--gold); border: 1.5px solid var(--gold);
             padding: 15px 30px; border-radius: 10px; cursor: pointer;
             font-size: 0.9rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 3px; transition: 0.5s;
-            margin-top: 15px; width: 100%;
+            letter-spacing: 3px; transition: 0.5s; margin-top: 15px; width: 100%;
         }
         .btn:hover { background: var(--gold); color: #2e0308; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
 
@@ -76,18 +75,8 @@
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .slideshow-container {
-            margin-top: 30px; border-radius: 15px; overflow: hidden;
-            border: 2px solid var(--gold); height: 300px; position: relative;
-        }
-        .slideshow-container img { width: 100%; height: 100%; object-fit: cover; }
-
         .hidden { display: none; }
         #music-box { position: absolute; visibility: hidden; }
-        
-        /* Custom scrollbar for the letter */
-        #final-letter::-webkit-scrollbar { width: 5px; }
-        #final-letter::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -127,34 +116,23 @@
         <p>May God bless you abundantly, just as He has been faithful in your life. I can't wait for the new chapter we have started together.</p>
         
         <h2 style="font-family: 'Great Vibes', cursive; text-align: right; color: var(--gold); font-size: 2.2rem; margin-top: 40px;">Gift Sebata</h2>
-
-        <div class="slideshow-container" id="slideshow">
-            <div class="mySlides"><img src="photo1.jpg"></div>
-            <div class="mySlides"><img src="photo2.jpg"></div>
-            <div class="mySlides"><img src="photo3.jpg"></div>
-            <div class="mySlides"><img src="photo4.jpg"></div>
-            <div class="mySlides"><img src="photo5.jpg"></div>
-        </div>
     </div>
 </div>
 
 <script>
-    // Rose Petal Animation
     function createPetals() {
         for (let i = 0; i < 20; i++) {
             let petal = document.createElement('div');
             petal.className = 'petal';
             petal.style.left = Math.random() * 100 + 'vw';
             let size = Math.random() * 15 + 10 + 'px';
-            petal.style.width = size;
-            petal.style.height = size;
+            petal.style.width = size; petal.style.height = size;
             petal.style.animationDelay = Math.random() * 12 + 's';
             document.body.appendChild(petal);
         }
     }
     createPetals();
 
-    // YouTube Audio
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -197,12 +175,10 @@
             optionsDiv.innerHTML = '';
             data.ops.forEach((opt, index) => {
                 const b = document.createElement('button');
-                b.className = 'btn';
-                b.innerText = opt;
+                b.className = 'btn'; b.innerText = opt;
                 b.onclick = () => {
                     if (data.correct === "ANY" || index === data.correct) {
-                        currentScenario++;
-                        loadQuestion();
+                        currentScenario++; loadQuestion();
                     } else {
                         document.getElementById('game-container').animate([
                             { transform: 'translateX(0)' }, { transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(0)' }
@@ -235,17 +211,10 @@
     function showLetter() {
         document.getElementById('screen-proposal').classList.add('hidden');
         document.getElementById('final-letter').style.display = 'block';
-        showSlides();
-    }
-
-    let slideIndex = 0;
-    function showSlides() {
-        let slides = document.getElementsByClassName("mySlides");
-        for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-        slideIndex++;
-        if (slideIndex > slides.length) {slideIndex = 1}
-        slides[slideIndex-1].style.display = "block";
-        setTimeout(showSlides, 3500);
+        
+        // APPLY THE BACKGROUND IMAGE HERE
+        // Replace 'background.jpg' with the actual name of your photo on GitHub
+        document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background.jpg')";
     }
 </script>
 </body>
