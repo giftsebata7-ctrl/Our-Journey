@@ -23,9 +23,10 @@
             background-position: center;
             overflow: hidden;
             display: flex; justify-content: center; align-items: center;
-            transition: background 2s ease-in-out; /* Smooth transition for the final image */
+            transition: background 2s ease-in-out; 
         }
 
+        /* Floating Rose Petals */
         .petal {
             position: absolute; background-color: #ff4d6d;
             border-radius: 150% 0 150% 0; opacity: 0.6;
@@ -40,7 +41,7 @@
         }
 
         #game-container {
-            background: rgba(0, 0, 0, 0.4); /* Slightly darker to make text pop against any background */
+            background: rgba(46, 3, 8, 0.7); /* Frosted Glass Look */
             backdrop-filter: blur(15px);
             border: 1px solid rgba(212, 175, 55, 0.3);
             padding: 40px 25px; border-radius: 50px;
@@ -48,6 +49,7 @@
             text-align: center; max-width: 450px; width: 90%;
             z-index: 10; color: var(--cream);
             position: relative;
+            transition: background 1s ease;
         }
 
         h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--gold); margin: 10px 0; }
@@ -74,6 +76,10 @@
             animation: fadeIn 3s ease; overflow-y: auto; max-height: 80vh;
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Custom scrollbar for the letter box */
+        #final-letter::-webkit-scrollbar { width: 5px; }
+        #final-letter::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
         .hidden { display: none; }
         #music-box { position: absolute; visibility: hidden; }
@@ -120,6 +126,7 @@
 </div>
 
 <script>
+    // Create floating petals
     function createPetals() {
         for (let i = 0; i < 20; i++) {
             let petal = document.createElement('div');
@@ -133,6 +140,7 @@
     }
     createPetals();
 
+    // YouTube API for Music
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -151,7 +159,7 @@
     let timeLeft = 8;
 
     const scenarios = [
-        { q: "Where was our very first date?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
+        { q: "What was the first date we went on?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
         { q: "What was I wearing that day?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
         { q: "Why were you so shy?", ops: ["My charm was too much", "I was too handsome", "You forgot how to speak", "All of the above"], correct: "ANY" },
         { q: "What day did I propose to you?", ops: ["08 June 2023", "25 December 2023", "12 October 1995", "1 April 2023"], correct: 3 },
@@ -212,9 +220,9 @@
         document.getElementById('screen-proposal').classList.add('hidden');
         document.getElementById('final-letter').style.display = 'block';
         
-        // APPLY THE BACKGROUND IMAGE HERE
-        // Replace 'background.jpg' with the actual name of your photo on GitHub
+        // Final Background Reveal
         document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background.jpg')";
+        document.getElementById('game-container').style.background = "rgba(0, 0, 0, 0.4)";
     }
 </script>
 </body>
