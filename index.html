@@ -35,25 +35,28 @@
         }
         @keyframes fly {
             0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
             100% { transform: translateY(110vh) rotate(720deg) translateX(50px); opacity: 0; }
         }
 
         #game-container {
-            background: rgba(46, 3, 8, 0.7); /* Frosted Glass Look */
+            background: rgba(20, 0, 5, 0.75); /* Darker for better contrast */
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 40px 25px; border-radius: 50px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 30px 25px; border-radius: 40px;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
-            text-align: center; max-width: 450px; width: 90%;
+            text-align: center; 
+            max-width: 500px; 
+            width: 90%;
+            max-height: 90vh; /* Keeps it within the phone screen */
             z-index: 10; color: var(--cream);
             position: relative;
-            transition: background 1s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--gold); margin: 10px 0; }
-        p { font-size: 1rem; line-height: 1.6; color: var(--cream); font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        h1 { font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem, 8vw, 3.5rem); color: var(--gold); margin: 10px 0; }
+        p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.6; color: var(--cream); font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 
         .timer-circle {
             font-size: 1.8rem; font-weight: 600; color: var(--gold);
@@ -63,24 +66,27 @@
 
         .btn {
             background: transparent; color: var(--gold); border: 1.5px solid var(--gold);
-            padding: 15px 30px; border-radius: 10px; cursor: pointer;
-            font-size: 0.9rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 3px; transition: 0.5s; margin-top: 15px; width: 100%;
+            padding: 12px 20px; border-radius: 10px; cursor: pointer;
+            font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 2px; transition: 0.5s; margin-top: 10px; width: 100%;
         }
-        .btn:hover { background: var(--gold); color: #2e0308; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        .btn:hover { background: var(--gold); color: #2e0308; }
 
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
 
         #final-letter {
-            display: none; text-align: left; padding: 10px;
-            animation: fadeIn 3s ease; overflow-y: auto; max-height: 80vh;
+            display: none; text-align: left; padding: 5px;
+            animation: fadeIn 3s ease; 
+            overflow-y: auto; 
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) transparent;
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Custom scrollbar for the letter box */
-        #final-letter::-webkit-scrollbar { width: 5px; }
+        
+        /* Elegant Custom Scrollbar for Chrome/Safari */
+        #final-letter::-webkit-scrollbar { width: 4px; }
         #final-letter::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .hidden { display: none; }
         #music-box { position: absolute; visibility: hidden; }
     </style>
@@ -91,42 +97,41 @@
 
 <div id="game-container">
     <div id="screen-intro">
-        <h2 style="font-weight: 300; letter-spacing: 5px; margin-bottom: 0;">DEAREST</h2>
+        <h2 style="font-weight: 300; letter-spacing: 5px; margin-bottom: 0; font-size: 0.8rem;">DEAREST</h2>
         <h1>Mama Qhawe</h1>
-        <div style="height: 1px; width: 50px; background: var(--gold); margin: 20px auto;"></div>
+        <div style="height: 1px; width: 50px; background: var(--gold); margin: 15px auto;"></div>
         <p>I’ve kept a few memories locked away. Answer these five questions to open my heart to you.</p>
         <button class="btn" onclick="startGame()">Begin Our Story</button>
     </div>
 
     <div id="screen-game" class="hidden">
         <div class="timer-circle" id="time">08</div>
-        <h2 id="question" style="font-family: 'Great Vibes', cursive; font-size: 2.2rem; color: var(--gold);">Question</h2>
+        <h2 id="question" style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--gold);">Question</h2>
         <div class="options-grid" id="options"></div>
     </div>
 
     <div id="screen-proposal" class="hidden">
-        <h1 style="font-size: 2.5rem;">One Last Thing...</h1>
-        <p>You remember us perfectly. But there is one question I haven't officially asked yet for this year...</p>
-        <h2 style="color: var(--gold); font-size: 1.6rem; margin: 30px 0; letter-spacing: 2px;">Will you be my Valentine?</h2>
+        <h1 style="font-size: 2.2rem;">One Last Thing...</h1>
+        <p>You remember us perfectly. But there is one question I haven't officially asked yet...</p>
+        <h2 style="color: var(--gold); font-size: 1.4rem; margin: 20px 0; letter-spacing: 1px;">Will you be my Valentine?</h2>
         <button class="btn" onclick="showLetter()">Yes, I will ❤️</button>
         <button class="btn" onclick="showLetter()">Always Yes ❤️</button>
     </div>
 
     <div id="final-letter">
-        <h1 style="text-align: center; font-size: 2.8rem; margin-bottom: 10px;">To My Mama Qhawe</h1>
-        <p style="text-align: center; color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 30px;">MUSIC: MY LOVE - MTHUNZI</p>
+        <h1 style="text-align: center; font-size: 2.5rem; margin-top: 0;">To My Mama Qhawe</h1>
+        <p style="text-align: center; color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px;">MUSIC: MY LOVE - MTHUNZI</p>
         
         <p>I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it.</p>
         <p>I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day.</p>
         <p>I just wanted to take this time to say I see you, I appreciate you, and most importantly—<strong>NDOKUDA</strong>.</p>
         <p>May God bless you abundantly, just as He has been faithful in your life. I can't wait for the new chapter we have started together.</p>
         
-        <h2 style="font-family: 'Great Vibes', cursive; text-align: right; color: var(--gold); font-size: 2.2rem; margin-top: 40px;">Gift Sebata</h2>
+        <h2 style="font-family: 'Great Vibes', cursive; text-align: right; color: var(--gold); font-size: 2rem; margin-top: 20px;">Gift Sebata</h2>
     </div>
 </div>
 
 <script>
-    // Create floating petals
     function createPetals() {
         for (let i = 0; i < 20; i++) {
             let petal = document.createElement('div');
@@ -140,7 +145,6 @@
     }
     createPetals();
 
-    // YouTube API for Music
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -159,7 +163,7 @@
     let timeLeft = 8;
 
     const scenarios = [
-        { q: "What was the first date we went on?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
+        { q: "Where was our very first date?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
         { q: "What was I wearing that day?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
         { q: "Why were you so shy?", ops: ["My charm was too much", "I was too handsome", "You forgot how to speak", "All of the above"], correct: "ANY" },
         { q: "What day did I propose to you?", ops: ["08 June 2023", "25 December 2023", "12 October 1995", "1 April 2023"], correct: 3 },
@@ -219,12 +223,8 @@
     function showLetter() {
         document.getElementById('screen-proposal').classList.add('hidden');
         document.getElementById('final-letter').style.display = 'block';
-        
-        // Final Background Reveal
-        document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background.jpg')";
-        document.getElementById('game-container').style.background = "rgba(0, 0, 0, 0.4)";
+        document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('background.jpg')";
     }
 </script>
 </body>
 </html>
-
