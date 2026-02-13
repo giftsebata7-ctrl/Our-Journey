@@ -6,63 +6,75 @@
     <title>For My Mama Qhawe ❤️</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
     <style>
         :root { 
             --velvet: #4a051c; 
             --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.6);
             --cream: #fff5f7;
         }
 
-        * { box-sizing: border-box; }
+        /* Custom Cursor for Desktop */
+        * { 
+            box-sizing: border-box; 
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-9/sym833.cur'), auto; 
+        }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', sans-serif;
             background: radial-gradient(circle, #5e0b15 0%, #2e0308 100%);
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
             overflow: hidden;
             display: flex; justify-content: center; align-items: center;
             transition: background 2s ease-in-out; 
         }
 
-        .petal {
-            position: absolute; background-color: #ff4d6d;
-            border-radius: 150% 0 150% 0; opacity: 0.6;
-            pointer-events: none; animation: fly 12s linear infinite;
-            filter: blur(1px);
+        /* Screen Transitions */
+        .screen {
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
         }
-        @keyframes fly {
-            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
-            100% { transform: translateY(110vh) rotate(720deg) translateX(50px); opacity: 0; }
-        }
+        .hidden { opacity: 0; transform: scale(0.5); pointer-events: none; position: absolute; }
+        .visible { opacity: 1; transform: scale(1); position: relative; }
 
         #game-container {
             background: rgba(20, 0, 5, 0.75); 
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            /* Gold Leaf Border Effect */
+            border: 5px solid transparent;
+            border-image: url('https://www.transparenttextures.com/patterns/gold-glitter.png') 30 stretch;
+            outline: 2px solid var(--gold);
+            outline-offset: -8px;
+            
             padding: 30px 25px; border-radius: 40px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
             text-align: center; 
-            max-width: 500px; 
-            width: 90%;
+            max-width: 500px; width: 90%;
             max-height: 90vh; 
             z-index: 10; color: var(--cream);
             position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
-        h1 { font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem, 8vw, 3.5rem); color: var(--gold); margin: 10px 0; }
-        p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.6; color: var(--cream); font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
-
+        /* Glow Effect for Timer */
         .timer-circle {
             font-size: 1.8rem; font-weight: 600; color: var(--gold);
             border: 2px solid var(--gold); width: 70px; height: 70px; 
             line-height: 65px; border-radius: 50%; margin: 0 auto 20px auto;
+            box-shadow: 0 0 20px var(--gold-glow), inset 0 0 10px var(--gold-glow);
+            animation: pulse-glow 2s infinite;
         }
 
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px var(--gold-glow); }
+            50% { box-shadow: 0 0 30px var(--gold), inset 0 0 15px var(--gold-glow); }
+            100% { box-shadow: 0 0 15px var(--gold-glow); }
+        }
+
+        h1 { font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem, 8vw, 3.5rem); color: var(--gold); margin: 10px 0; cursor: pointer; }
+        
         .btn {
             background: transparent; color: var(--gold); border: 1.5px solid var(--gold);
             padding: 12px 20px; border-radius: 10px; cursor: pointer;
@@ -74,18 +86,33 @@
         .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
 
         #final-letter {
-            display: none; text-align: left; padding: 5px;
-            animation: fadeIn 3s ease; 
+            text-align: left; padding: 5px;
             overflow-y: auto; 
-            scrollbar-width: thin;
-            scrollbar-color: var(--gold) transparent;
+            max-height: 60vh;
         }
-        
-        #final-letter::-webkit-scrollbar { width: 4px; }
-        #final-letter::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .hidden { display: none; }
+        #typing-text { line-height: 1.7; font-size: 1rem; }
+
+        /* Digital Coupons Section */
+        .coupon-container {
+            margin-top: 25px;
+            border-top: 1px dashed var(--gold);
+            padding-top: 15px;
+        }
+        .coupon-link {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 12px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 5px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+        .coupon-link:hover { background: var(--gold); color: white; }
+
         #music-box { position: absolute; visibility: hidden; }
     </style>
 </head>
@@ -94,45 +121,58 @@
 <div id="music-box"><div id="player"></div></div>
 
 <div id="game-container">
-    <div id="screen-intro">
+    <div id="screen-intro" class="screen visible">
         <h2 style="font-weight: 300; letter-spacing: 5px; margin-bottom: 0; font-size: 0.8rem;">DEAREST</h2>
-        <h1>Mama Qhawe</h1>
+        <h1 onclick="easterEgg()">Mama Qhawe</h1>
         <div style="height: 1px; width: 50px; background: var(--gold); margin: 15px auto;"></div>
-        <p>I’ve kept a few memories locked away. Answer these five questions to open my heart to you.</p>
+        <p>Answer these five questions to open my heart to you.</p>
         <button class="btn" onclick="startGame()">Begin Our Story</button>
     </div>
 
-    <div id="screen-game" class="hidden">
+    <div id="screen-game" class="screen hidden">
         <div class="timer-circle" id="time">08</div>
         <p id="retry-msg" style="color: #ff4d6d; font-size: 0.8rem; font-weight: bold; min-height: 20px;"></p>
         <h2 id="question" style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--gold);">Question</h2>
         <div class="options-grid" id="options"></div>
     </div>
 
-    <div id="screen-proposal" class="hidden">
+    <div id="screen-proposal" class="screen hidden">
         <h1 style="font-size: 2.2rem;">One Last Thing...</h1>
-        <p>You remember us perfectly. But there is one question I haven't officially asked yet...</p>
-        <h2 style="color: var(--gold); font-size: 1.4rem; margin: 20px 0; letter-spacing: 1px;">Will you be my Valentine?</h2>
+        <p>Rumbidzo, will you be my Valentine?</p>
         <button class="btn" onclick="showLetter()">Yes, I will ❤️</button>
         <button class="btn" onclick="showLetter()">Always Yes ❤️</button>
     </div>
 
-    <div id="final-letter">
-        <h1 style="text-align: center; font-size: 2.5rem; margin-top: 0;">To My Mama Qhawe</h1>
-        <div id="love-counter" style="text-align: center; font-weight: bold; color: var(--gold); margin-bottom: 10px;"></div>
-        <p style="text-align: center; color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px;">MUSIC: MY LOVE - MTHUNZI</p>
-        
-        <p>I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it.</p>
-        <p>I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day.</p>
-        <p>I just wanted to take this time to say I see you, I appreciate you, and most importantly—<strong>NDOKUDA</strong>.</p>
-        <p>May God bless you abundantly, just as He has been faithful in your life. I can't wait for the new chapter we have started together.</p>
-        
-        <h2 style="font-family: 'Great Vibes', cursive; text-align: right; color: var(--gold); font-size: 2rem; margin-top: 20px;">Gift Sebata</h2>
-        <p style="text-align: center; font-size: 0.6rem; opacity: 0.5;">(Tap background to see photo clearly)</p>
+    <div id="screen-letter" class="screen hidden">
+        <div id="final-letter">
+            <h1 style="text-align: center; font-size: 2.5rem; margin-top: 0;">To My Mama Qhawe</h1>
+            <div id="love-counter" style="text-align: center; font-weight: bold; color: var(--gold); margin-bottom: 10px;"></div>
+            
+            <div id="typing-text"></div>
+            
+            <div class="coupon-container">
+                <p style="font-size: 0.8rem; color: var(--gold); margin-bottom: 10px; text-align: center;">🎁 Your Valentine's Vouchers (Click to claim):</p>
+                <div style="text-align: center;">
+                    <a href="#" class="coupon-link" onclick="openCoupon('One Deep Foot Rub')">🎟️ Foot Rub</a>
+                    <a href="#" class="coupon-link" onclick="openCoupon('A Dinner of Your Choice')">🎟️ Dream Dinner</a>
+                    <a href="#" class="coupon-link" onclick="openCoupon('Full Day of No Chores')">🎟️ Lazy Day</a>
+                    <a href="#" class="coupon-link" onclick="openCoupon('Unlimited Kisses for 24h')">🎟️ Kisses</a>
+                    <a href="#" class="coupon-link" onclick="openCoupon('A Movie Night Pick')">🎟️ Movie Night</a>
+                </div>
+            </div>
+
+            <h2 style="font-family: 'Great Vibes', cursive; text-align: right; color: var(--gold); font-size: 2rem; margin-top: 20px;">Gift Sebata</h2>
+        </div>
     </div>
 </div>
 
 <script>
+    // 1. Easter Egg logic
+    function easterEgg() {
+        alert("❤️ You're my forever.");
+    }
+
+    // 2. Love Counter logic
     const startDate = new Date("2024-04-01T10:48:00-05:00");
     setInterval(() => {
         const diff = new Date() - startDate;
@@ -144,19 +184,7 @@
         if(el) el.innerHTML = `${d} Days, ${h}h, ${m}m, ${s}s of Loving You`;
     }, 1000);
 
-    function createPetals() {
-        for (let i = 0; i < 20; i++) {
-            let petal = document.createElement('div');
-            petal.className = 'petal';
-            petal.style.left = Math.random() * 100 + 'vw';
-            let size = Math.random() * 15 + 10 + 'px';
-            petal.style.width = size; petal.style.height = size;
-            petal.style.animationDelay = Math.random() * 12 + 's';
-            document.body.appendChild(petal);
-        }
-    }
-    createPetals();
-
+    // 3. YouTube API
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -170,83 +198,107 @@
         });
     }
 
+    // 4. Game Logic
     let currentScenario = 0;
     let timer;
-    let timeLeft = 8;
-
     const scenarios = [
         { q: "Where was our very first date?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
         { q: "What was I wearing that day?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
-        { q: "Why were you so shy?", ops: ["My charm was too much", "I was too handsome", "You forgot how to speak", "All of the above"], correct: "ANY" },
-        { q: "What day did I propose to you?", ops: ["08 June 2023", "25 December 2023", "12 October 1995", "1 April 2023"], correct: 3 },
-        { q: "The most beautiful woman?", ops: ["Tapiwanashe Mutumhe", "Rumbidzo Mutumhe", "Mama Qhawe", "Mrs Sebata JNR"], correct: "ANY" }
+        { q: "Why were you so shy?", ops: ["Charm", "Too handsome", "Mute", "All of the above"], correct: "ANY" },
+        { q: "What day did I propose to you?", ops: ["08 June 2023", "25 Dec 2023", "12 Oct 1995", "1 April 2023"], correct: 3 },
+        { q: "The most beautiful woman?", ops: ["Tapiwanashe", "Rumbidzo", "Mama Qhawe", "Mrs Sebata JNR"], correct: "ANY" }
     ];
+
+    function transition(fromId, toId) {
+        document.getElementById(fromId).classList.replace('visible', 'hidden');
+        setTimeout(() => {
+            document.getElementById(toId).classList.replace('hidden', 'visible');
+        }, 800);
+    }
 
     function startGame() {
         if (player) player.playVideo();
-        document.getElementById('screen-intro').classList.add('hidden');
-        document.getElementById('screen-game').classList.remove('hidden');
+        transition('screen-intro', 'screen-game');
         loadQuestion();
     }
 
     function loadQuestion() {
-        if (currentScenario < scenarios.length) {
-            timeLeft = 8;
-            document.getElementById('time').innerText = timeLeft;
-            const data = scenarios[currentScenario];
-            document.getElementById('question').innerText = data.q;
-            const optionsDiv = document.getElementById('options');
-            optionsDiv.innerHTML = '';
-            data.ops.forEach((opt, index) => {
-                const b = document.createElement('button');
-                b.className = 'btn'; b.innerText = opt;
-                b.onclick = () => {
-                    if (data.correct === "ANY" || index === data.correct) {
-                        currentScenario++; 
-                        document.getElementById('retry-msg').innerText = "";
-                        loadQuestion();
-                    } else {
-                        document.getElementById('game-container').animate([
-                            { transform: 'translateX(0)' }, { transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(0)' }
-                        ], { duration: 300 });
-                        document.getElementById('retry-msg').innerText = "You are getting overfamiliarised! Try again, my love.";
-                    }
-                };
-                optionsDiv.appendChild(b);
-            });
-            startTimer();
-        } else {
-            showProposal();
-        }
-    }
-
-    function startTimer() {
+        let timeLeft = 8;
+        document.getElementById('time').innerText = timeLeft;
+        const data = scenarios[currentScenario];
+        document.getElementById('question').innerText = data.q;
+        const optionsDiv = document.getElementById('options');
+        optionsDiv.innerHTML = '';
+        data.ops.forEach((opt, index) => {
+            const b = document.createElement('button');
+            b.className = 'btn'; b.innerText = opt;
+            b.onclick = () => {
+                if (data.correct === "ANY" || index === data.correct) {
+                    currentScenario++;
+                    if (currentScenario < scenarios.length) loadQuestion();
+                    else transition('screen-game', 'screen-proposal');
+                } else {
+                    document.getElementById('retry-msg').innerText = "You are getting overfamiliarised! Try again.";
+                }
+            };
+            optionsDiv.appendChild(b);
+        });
         clearInterval(timer);
         timer = setInterval(() => {
             timeLeft--;
             document.getElementById('time').innerText = timeLeft;
-            if (timeLeft <= 0) { currentScenario++; loadQuestion(); }
+            if (timeLeft <= 0) {
+                currentScenario++;
+                if (currentScenario < scenarios.length) loadQuestion();
+                else transition('screen-game', 'screen-proposal');
+            }
         }, 1000);
     }
 
-    function showProposal() {
-        clearInterval(timer);
-        document.getElementById('screen-game').classList.add('hidden');
-        document.getElementById('screen-proposal').classList.remove('hidden');
-    }
-
+    // 5. Confetti and Typing logic
     function showLetter() {
-        document.getElementById('screen-proposal').classList.add('hidden');
-        document.getElementById('final-letter').style.display = 'block';
-        document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('background.jpg')";
+        // Confetti Burst
+        const duration = 5 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        const interval = setInterval(function() {
+            const timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) return clearInterval(interval);
+            const particleCount = 50 * (timeLeft / duration);
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: Math.random(), y: Math.random() - 0.2 }, colors: ['#ff4d6d', '#d4af37'] }));
+        }, 250);
+
+        transition('screen-proposal', 'screen-letter');
+        document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('background.jpg')";
+        
+        typeMessage();
     }
 
-    document.body.onclick = function(e) {
-        if (document.getElementById('final-letter').style.display === 'block' && e.target.tagName !== 'BUTTON') {
-            const container = document.getElementById('game-container');
-            container.style.opacity = container.style.opacity === "0.1" ? "1" : "0.1";
-        }
-    };
+    function typeMessage() {
+        const msg = "I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it. I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day. I see you, I appreciate you, and most importantly—NDOKUDA. I can't wait for the new chapter we have started together.";
+        let i = 0;
+        const typingInterval = setInterval(() => {
+            document.getElementById("typing-text").innerHTML += msg.charAt(i);
+            i++;
+            if (i >= msg.length) clearInterval(typingInterval);
+        }, 45);
+    }
+
+    // 6. Coupon Logic
+    function openCoupon(reward) {
+        const couponWindow = window.open("", "_blank", "width=400,height=300");
+        couponWindow.document.write(`
+            <body style="background:#2e0308; color:#d4af37; font-family:sans-serif; text-align:center; padding:50px; border:10px solid #d4af37;">
+                <h2>🌹 VALENTINE VOUCHER 🌹</h2>
+                <hr style="border-color:#d4af37">
+                <p>This voucher entitles <b>Rumbidzo Mutumhe</b> to:</p>
+                <h1 style="text-transform:uppercase;">${reward}</h1>
+                <p><i>Valid Forever. Non-transferable.</i></p>
+                <p>Love, Gift Sebata</p>
+            </body>
+        `);
+    }
 </script>
 </body>
 </html>
