@@ -3,78 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Rumbidzo Mutumhe ❤️</title>
+    <title>For My Mama Qhawe ❤️</title>
     
-    <meta property="og:title" content="A Special Message for Rumbidzo Mutumhe">
-    <meta property="og:description" content="Gift Sebata has a challenge for you. Do you remember our journey?">
-
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
     <style>
         :root { 
             --velvet: #4a051c; 
-            --gold-grad: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             --gold: #d4af37;
             --cream: #fff5f7;
         }
 
-        /* Custom Cursor for Desktop */
-        * { box-sizing: border-box; cursor: url('https://cur.cursors-4u.net/symbols/sym-9/sym833.cur'), auto; }
+        * { box-sizing: border-box; }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', sans-serif;
             background: radial-gradient(circle, #5e0b15 0%, #2e0308 100%);
-            background-size: cover; background-position: center;
-            overflow: hidden; display: flex; justify-content: center; align-items: center;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
             transition: background 2s ease-in-out; 
         }
 
-        /* Vignette Lighting */
-        body::after {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.7) 100%);
-            pointer-events: none; z-index: 5;
+        .petal {
+            position: absolute; background-color: #ff4d6d;
+            border-radius: 150% 0 150% 0; opacity: 0.6;
+            pointer-events: none; animation: fly 12s linear infinite;
+            filter: blur(1px);
         }
-
-        /* Parallax Layer */
-        #parallax-bg {
-            position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
-            background-size: cover; background-position: center;
-            z-index: 1; transition: transform 0.1s ease-out;
+        @keyframes fly {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            100% { transform: translateY(110vh) rotate(720deg) translateX(50px); opacity: 0; }
         }
 
         #game-container {
-            background: rgba(20, 0, 5, 0.85);
-            backdrop-filter: blur(25px); /* Increased Blurred Glass Effect */
-            border: 3px solid transparent;
-            border-image: var(--gold-grad) 1; /* Gold Leaf Border Look */
+            background: rgba(20, 0, 5, 0.75); 
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             padding: 30px 25px; border-radius: 40px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-            text-align: center; max-width: 500px; width: 90%;
-            max-height: 90vh; z-index: 10; color: var(--cream);
-            position: relative; display: flex; flex-direction: column; justify-content: center;
-            transition: opacity 0.5s ease;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+            text-align: center; 
+            max-width: 500px; 
+            width: 90%;
+            max-height: 90vh; 
+            z-index: 10; color: var(--cream);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* Gradient Text headers */
-        .shimmer {
-            background: var(--gold-grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Great Vibes', cursive;
-        }
-
-        h1 { font-size: clamp(2.5rem, 8vw, 3.5rem); margin: 10px 0; }
+        h1 { font-family: 'Great Vibes', cursive; font-size: clamp(2.5rem, 8vw, 3.5rem); color: var(--gold); margin: 10px 0; }
         p { font-size: clamp(0.85rem, 3.5vw, 1rem); line-height: 1.6; color: var(--cream); font-weight: 400; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 
-        /* Glow Effect Timer */
         .timer-circle {
             font-size: 1.8rem; font-weight: 600; color: var(--gold);
             border: 2px solid var(--gold); width: 70px; height: 70px; 
             line-height: 65px; border-radius: 50%; margin: 0 auto 20px auto;
-            box-shadow: 0 0 15px var(--gold), inset 0 0 10px var(--gold);
         }
 
         .btn {
@@ -83,60 +69,34 @@
             font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
             letter-spacing: 2px; transition: 0.5s; margin-top: 10px; width: 100%;
         }
-        .btn:hover { background: var(--gold); color: #2e0308; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        .btn:hover { background: var(--gold); color: #2e0308; }
 
         .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
 
-        /* Love Counter Styling */
-        #love-counter {
-            font-size: 0.9rem; color: var(--gold); font-weight: 600;
-            margin: 15px 0; letter-spacing: 1px;
-        }
-
-        /* Coupon Section */
-        .coupon-box { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
-        .coupon { border: 1px dashed var(--gold); padding: 8px; font-size: 0.7rem; border-radius: 5px; cursor: pointer; }
-        .coupon:hover { background: var(--gold); color: #000; }
-
         #final-letter {
             display: none; text-align: left; padding: 5px;
-            overflow-y: auto; scrollbar-width: none;
+            animation: fadeIn 3s ease; 
+            overflow-y: auto; 
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) transparent;
         }
-        #final-letter::-webkit-scrollbar { display: none; }
-
-        /* Animated SVG Heartbeat */
-        .heart-svg { width: 50px; fill: var(--gold); animation: heartBeat 1.5s infinite; margin: 0 auto; }
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
-        }
-
-        .hidden { display: none !important; opacity: 0; transform: scale(0.9); transition: 0.5s; }
-        .fade-in { animation: fadeIn 2s forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         
+        #final-letter::-webkit-scrollbar { width: 4px; }
+        #final-letter::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .hidden { display: none; }
         #music-box { position: absolute; visibility: hidden; }
-        
-        .petal {
-            position: absolute; background-color: #ff4d6d;
-            border-radius: 150% 0 150% 0; opacity: 0.6;
-            pointer-events: none; animation: fly 12s linear infinite;
-            filter: blur(1px); z-index: 6;
-        }
     </style>
 </head>
 <body>
 
 <div id="music-box"><div id="player"></div></div>
-<div id="parallax-bg"></div>
 
-<div id="game-container" class="fade-in">
+<div id="game-container">
     <div id="screen-intro">
         <h2 style="font-weight: 300; letter-spacing: 5px; margin-bottom: 0; font-size: 0.8rem;">DEAREST</h2>
-        <h1 class="shimmer">Rumbidzo Mutumhe</h1>
+        <h1>Mama Qhawe</h1>
         <div style="height: 1px; width: 50px; background: var(--gold); margin: 15px auto;"></div>
         <p>I’ve kept a few memories locked away. Answer these five questions to open my heart to you.</p>
         <button class="btn" onclick="startGame()">Begin Our Story</button>
@@ -145,9 +105,148 @@
     <div id="screen-game" class="hidden">
         <div class="timer-circle" id="time">08</div>
         <p id="retry-msg" style="color: #ff4d6d; font-size: 0.8rem; font-weight: bold; min-height: 20px;"></p>
-        <h2 id="question" class="shimmer" style="font-size: 2rem;">Question</h2>
+        <h2 id="question" style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--gold);">Question</h2>
         <div class="options-grid" id="options"></div>
     </div>
 
     <div id="screen-proposal" class="hidden">
-        <svg class="heart-svg" viewBox="0 0 32 32"><path d="M16
+        <h1 style="font-size: 2.2rem;">One Last Thing...</h1>
+        <p>You remember us perfectly. But there is one question I haven't officially asked yet...</p>
+        <h2 style="color: var(--gold); font-size: 1.4rem; margin: 20px 0; letter-spacing: 1px;">Will you be my Valentine?</h2>
+        <button class="btn" onclick="showLetter()">Yes, I will ❤️</button>
+        <button class="btn" onclick="showLetter()">Always Yes ❤️</button>
+    </div>
+
+    <div id="final-letter">
+        <h1 style="text-align: center; font-size: 2.5rem; margin-top: 0;">To My Mama Qhawe</h1>
+        <div id="love-counter" style="text-align: center; font-weight: bold; color: var(--gold); margin-bottom: 10px;"></div>
+        <p style="text-align: center; color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 20px;">MUSIC: MY LOVE - MTHUNZI</p>
+        
+        <p>I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it.</p>
+        <p>I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day.</p>
+        <p>I just wanted to take this time to say I see you, I appreciate you, and most importantly—<strong>NDOKUDA</strong>.</p>
+        <p>May God bless you abundantly, just as He has been faithful in your life. I can't wait for the new chapter we have started together.</p>
+        
+        <h2 style="font-family: 'Great Vibes', cursive; text-align: right; color: var(--gold); font-size: 2rem; margin-top: 20px;">Gift Sebata</h2>
+        <p style="text-align: center; font-size: 0.6rem; opacity: 0.5;">(Tap background to see photo clearly)</p>
+    </div>
+</div>
+
+<script>
+    const startDate = new Date("2024-04-01T10:48:00-05:00");
+    setInterval(() => {
+        const diff = new Date() - startDate;
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff / 3600000) % 24);
+        const m = Math.floor((diff / 60000) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        const el = document.getElementById("love-counter");
+        if(el) el.innerHTML = `${d} Days, ${h}h, ${m}m, ${s}s of Loving You`;
+    }, 1000);
+
+    function createPetals() {
+        for (let i = 0; i < 20; i++) {
+            let petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.style.left = Math.random() * 100 + 'vw';
+            let size = Math.random() * 15 + 10 + 'px';
+            petal.style.width = size; petal.style.height = size;
+            petal.style.animationDelay = Math.random() * 12 + 's';
+            document.body.appendChild(petal);
+        }
+    }
+    createPetals();
+
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '0', width: '0', videoId: 'rtOvBOTyX00',
+            playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': 'rtOvBOTyX00' }
+        });
+    }
+
+    let currentScenario = 0;
+    let timer;
+    let timeLeft = 8;
+
+    const scenarios = [
+        { q: "Where was our very first date?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
+        { q: "What was I wearing that day?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
+        { q: "Why were you so shy?", ops: ["My charm was too much", "I was too handsome", "You forgot how to speak", "All of the above"], correct: "ANY" },
+        { q: "What day did I propose to you?", ops: ["08 June 2023", "25 December 2023", "12 October 1995", "1 April 2023"], correct: 3 },
+        { q: "The most beautiful woman?", ops: ["Tapiwanashe Mutumhe", "Rumbidzo Mutumhe", "Mama Qhawe", "Mrs Sebata JNR"], correct: "ANY" }
+    ];
+
+    function startGame() {
+        if (player) player.playVideo();
+        document.getElementById('screen-intro').classList.add('hidden');
+        document.getElementById('screen-game').classList.remove('hidden');
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        if (currentScenario < scenarios.length) {
+            timeLeft = 8;
+            document.getElementById('time').innerText = timeLeft;
+            const data = scenarios[currentScenario];
+            document.getElementById('question').innerText = data.q;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            data.ops.forEach((opt, index) => {
+                const b = document.createElement('button');
+                b.className = 'btn'; b.innerText = opt;
+                b.onclick = () => {
+                    if (data.correct === "ANY" || index === data.correct) {
+                        currentScenario++; 
+                        document.getElementById('retry-msg').innerText = "";
+                        loadQuestion();
+                    } else {
+                        document.getElementById('game-container').animate([
+                            { transform: 'translateX(0)' }, { transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(0)' }
+                        ], { duration: 300 });
+                        document.getElementById('retry-msg').innerText = "You are getting overfamiliarised! Try again, my love.";
+                    }
+                };
+                optionsDiv.appendChild(b);
+            });
+            startTimer();
+        } else {
+            showProposal();
+        }
+    }
+
+    function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+            timeLeft--;
+            document.getElementById('time').innerText = timeLeft;
+            if (timeLeft <= 0) { currentScenario++; loadQuestion(); }
+        }, 1000);
+    }
+
+    function showProposal() {
+        clearInterval(timer);
+        document.getElementById('screen-game').classList.add('hidden');
+        document.getElementById('screen-proposal').classList.remove('hidden');
+    }
+
+    function showLetter() {
+        document.getElementById('screen-proposal').classList.add('hidden');
+        document.getElementById('final-letter').style.display = 'block';
+        document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('background.jpg')";
+    }
+
+    document.body.onclick = function(e) {
+        if (document.getElementById('final-letter').style.display === 'block' && e.target.tagName !== 'BUTTON') {
+            const container = document.getElementById('game-container');
+            container.style.opacity = container.style.opacity === "0.1" ? "1" : "0.1";
+        }
+    };
+</script>
+</body>
+</html>
