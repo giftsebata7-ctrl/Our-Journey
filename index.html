@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Rumbidzo Mutumhe ❤️</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
@@ -15,220 +14,152 @@
             --cream: #fff5f7;
         }
 
-        * { box-sizing: border-box; }
-
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(circle, #5e0b15 0%, #2e0308 100%);
-            background-size: cover; background-position: center;
+            background: #2e0308;
             overflow: hidden; display: flex; justify-content: center; align-items: center;
         }
 
+        /* Vignette - Pointer events NONE ensures it can't block clicks */
         body::after {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.7) 100%);
-            pointer-events: none; z-index: 5;
+            background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none; z-index: 10;
         }
 
         #game-container {
-            background: rgba(20, 0, 5, 0.85);
-            backdrop-filter: blur(25px);
-            border: 3px solid transparent;
-            border-image: var(--gold) 1;
-            padding: 30px 25px; border-radius: 40px;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
-            text-align: center; max-width: 500px; width: 90%;
-            max-height: 90vh; z-index: 10; color: var(--cream);
-            position: relative;
+            background: rgba(30, 0, 5, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--gold-static);
+            padding: 30px; border-radius: 40px;
+            text-align: center; max-width: 450px; width: 92%;
+            z-index: 100; color: var(--cream); position: relative;
         }
 
         .shimmer {
-            background: var(--gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            font-family: 'Great Vibes', cursive;
-        }
-
-        h1 { font-size: clamp(2.5rem, 8vw, 3.5rem); margin: 10px 0; }
-        
-        .timer-circle {
-            font-size: 1.8rem; font-weight: 600; color: var(--gold-static);
-            border: 2px solid var(--gold-static); width: 70px; height: 70px; 
-            line-height: 65px; border-radius: 50%; margin: 0 auto 20px auto;
-            box-shadow: 0 0 15px var(--gold-static);
+            background: var(--gold); -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; font-family: 'Great Vibes', cursive;
         }
 
         .btn {
-            background: transparent; color: var(--gold-static); border: 1.5px solid var(--gold-static);
-            padding: 12px 20px; border-radius: 10px; cursor: pointer;
-            font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
-            letter-spacing: 2px; transition: 0.5s; margin-top: 10px; width: 100%;
+            background: transparent; color: var(--gold-static); border: 2px solid var(--gold-static);
+            padding: 15px; border-radius: 12px; cursor: pointer; display: block;
+            font-size: 1rem; font-weight: 600; text-transform: uppercase;
+            width: 100%; margin-top: 20px;
+            position: relative; z-index: 200; /* Highest possible z-index */
         }
-        .btn:hover { background: var(--gold-static); color: #2e0308; }
 
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
-
-        #love-counter { font-size: 0.9rem; color: var(--gold-static); margin: 15px 0; }
-
-        /* Transition Classes */
-        .screen { transition: opacity 0.6s ease, transform 0.6s ease; width: 100%; }
-        .hidden { display: none; opacity: 0; transform: scale(0.9); }
-        .visible { display: block; opacity: 1; transform: scale(1); }
+        .screen { display: none; opacity: 0; transition: opacity 0.5s; }
+        .visible { display: block; opacity: 1; }
         
-        #music-box { position: absolute; visibility: hidden; pointer-events: none; }
-
-        .coupon-box { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
-        .coupon { border: 1px dashed var(--gold-static); padding: 10px; font-size: 0.7rem; border-radius: 5px; cursor: pointer; }
-
         #final-letter { text-align: left; overflow-y: auto; max-height: 60vh; }
-        #final-letter::-webkit-scrollbar { width: 4px; }
-        #final-letter::-webkit-scrollbar-thumb { background: var(--gold-static); }
+        #love-counter { font-size: 0.85rem; color: var(--gold-static); margin: 10px 0; font-weight: bold; text-align: center; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div id="music-box"><div id="player"></div></div>
+<div id="music-box" style="display:none;"><div id="player"></div></div>
 
 <div id="game-container">
     <div id="screen-intro" class="screen visible">
-        <h2 style="font-weight: 300; letter-spacing: 5px; font-size: 0.8rem;">DEAREST</h2>
-        <h1 class="shimmer">Rumbidzo Mutumhe</h1>
-        <div style="height: 1px; width: 50px; background: var(--gold-static); margin: 15px auto;"></div>
-        <p>Answer these 5 questions to open my heart.</p>
-        <button class="btn" onclick="startGame()">Open My Heart</button>
+        <h2 style="letter-spacing: 5px; font-size: 0.8rem;">DEAREST</h2>
+        <h1 class="shimmer" style="font-size: 3rem;">Rumbidzo</h1>
+        <p>Answer 5 questions to open my heart.</p>
+        <button class="btn" id="start-btn">Open My Heart</button>
     </div>
 
-    <div id="screen-game" class="screen hidden">
-        <div class="timer-circle" id="time">08</div>
-        <p id="retry-message" style="color: #ff4d6d; font-size: 0.8rem; font-weight: bold;"></p>
-        <h2 id="question" style="font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--gold-static);">Question</h2>
-        <div class="options-grid" id="options"></div>
+    <div id="screen-game" class="screen">
+        <div id="time" style="font-size: 2rem; color: var(--gold-static); border: 2px solid var(--gold-static); width: 60px; height: 60px; border-radius: 50%; margin: 0 auto; line-height: 55px;">08</div>
+        <h2 id="question" style="font-family: 'Great Vibes', cursive; color: var(--gold-static); font-size: 2rem;">Question</h2>
+        <div id="options"></div>
     </div>
 
-    <div id="screen-proposal" class="screen hidden">
-        <h1 class="shimmer">The Final Choice</h1>
-        <p>Rumbidzo, will you be my Valentine?</p>
-        <button class="btn" onclick="showLetter()">Yes, I will ❤️</button>
-        <button class="btn" onclick="showLetter()">Always Yes ❤️</button>
+    <div id="screen-proposal" class="screen">
+        <h1 class="shimmer">Will you be my Valentine?</h1>
+        <button class="btn" id="yes-btn">Yes, I will ❤️</button>
     </div>
 
-    <div id="screen-letter" class="screen hidden">
+    <div id="screen-letter" class="screen">
         <div id="final-letter">
-            <h1 class="shimmer" style="text-align: center; width: 100%;">To My Mama Qhawe</h1>
-            <div id="love-counter">Calculating...</div>
-            <div id="typing-text" style="font-size: 0.95rem; line-height: 1.6;"></div>
-            <div class="coupon-box">
-                <div class="coupon" onclick="alert('Redeemed: One Deep Foot Rub!')">🎟️ ONE FOOT RUB</div>
-                <div class="coupon" onclick="alert('Redeemed: A Dinner of Your Choice!')">🎟️ DREAM DINNER</div>
-            </div>
-            <h2 class="shimmer" style="text-align: right; width: 100%; font-size: 2rem; margin-top: 20px;">Gift Sebata</h2>
+            <h1 class="shimmer" style="text-align: center;">To Mama Qhawe</h1>
+            <div id="love-counter"></div>
+            <div id="typing-text" style="line-height: 1.6;"></div>
+            <h2 class="shimmer" style="text-align: right;">Gift Sebata</h2>
         </div>
     </div>
 </div>
 
 <script>
-    // Love Counter Logic
     const startDate = new Date("2024-04-01T10:48:00-05:00");
+    const msg = "I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it. I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day. I see you, I appreciate you, and most importantly—NDOKUDA. I can't wait for the new chapter we have started together.";
+
+    // YouTube Setup
+    var tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', { height: '0', width: '0', videoId: 'rtOvBOTyX00', playerVars: { 'autoplay': 0, 'playlist': 'rtOvBOTyX00' }});
+    }
+
+    // Love Counter
     setInterval(() => {
         const diff = new Date() - startDate;
         const d = Math.floor(diff / 86400000);
         const h = Math.floor((diff / 3600000) % 24);
         const m = Math.floor((diff / 60000) % 60);
         const s = Math.floor((diff / 1000) % 60);
-        const el = document.getElementById("love-counter");
-        if(el) el.innerHTML = `${d} Days, ${h}h, ${m}m, ${s}s of Loving You`;
+        document.getElementById("love-counter").innerHTML = `${d}d ${h}h ${m}m ${s}s of Love`;
     }, 1000);
 
-    // YouTube API
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '0', width: '0', videoId: 'rtOvBOTyX00',
-            playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': 'rtOvBOTyX00' }
-        });
+    // Navigation
+    function show(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('visible'));
+        document.getElementById(id).classList.add('visible');
     }
 
-    let currentStep = 0;
-    let timer;
+    // Game Logic
+    let step = 0;
     const scenarios = [
-        { q: "Where was our very first date?", ops: ["Sorrel", "Chicken Basket", "Queen of Hearts", "Barcellos"], correct: 0 },
-        { q: "What was I wearing that day?", ops: ["Formal Wear", "PSG Jersey", "Liverpool Jersey", "Plain Shirt"], correct: 1 },
-        { q: "Why were you so shy?", ops: ["Charm", "Too handsome", "Forgot how to speak", "All the above"], correct: "ANY" },
-        { q: "What day did I propose to you?", ops: ["08 June 2023", "25 Dec 2023", "12 Oct 1995", "1 April 2023"], correct: 3 },
-        { q: "The most beautiful woman?", ops: ["Tapiwanashe", "Rumbidzo", "Mama Qhawe", "Mrs Sebata JNR"], correct: "ANY" }
+        { q: "Our first date?", ops: ["Sorrel", "Basket", "Queen", "Barcellos"], correct: 0 },
+        { q: "What I wore?", ops: ["Formal", "PSG", "Liverpool", "Plain"], correct: 1 },
+        { q: "Why so shy?", ops: ["Charm", "Handsome", "Mute", "All"], correct: "ANY" },
+        { q: "Proposal date?", ops: ["June", "Dec", "Oct", "April 1"], correct: 3 },
+        { q: "Most beautiful?", ops: ["T", "R", "Mama Q", "Mrs S"], correct: "ANY" }
     ];
 
-    function transition(fromId, toId) {
-        const from = document.getElementById(fromId);
-        const to = document.getElementById(toId);
-        from.classList.replace('visible', 'hidden');
-        setTimeout(() => {
-            from.style.display = 'none';
-            to.style.display = 'block';
-            setTimeout(() => to.classList.replace('hidden', 'visible'), 50);
-        }, 600);
-    }
+    document.getElementById('start-btn').addEventListener('click', () => {
+        if(player && player.playVideo) player.playVideo();
+        show('screen-game');
+        nextQ();
+    });
 
-    function startGame() {
-        if (player && player.playVideo) player.playVideo();
-        transition('screen-intro', 'screen-game');
-        loadQuestion();
-    }
-
-    function loadQuestion() {
-        let timeLeft = 8;
-        document.getElementById('time').innerText = timeLeft;
-        const data = scenarios[currentStep];
+    function nextQ() {
+        if(step >= scenarios.length) { show('screen-proposal'); return; }
+        const data = scenarios[step];
         document.getElementById('question').innerText = data.q;
-        const optionsDiv = document.getElementById('options');
-        optionsDiv.innerHTML = '';
-        
-        data.ops.forEach((opt, idx) => {
+        const optBox = document.getElementById('options');
+        optBox.innerHTML = '';
+        data.ops.forEach((o, i) => {
             const b = document.createElement('button');
-            b.className = 'btn'; b.innerText = opt;
-            b.onclick = () => {
-                if (data.correct === "ANY" || idx === data.correct) {
-                    currentStep++;
-                    if (currentStep < scenarios.length) loadQuestion();
-                    else transition('screen-game', 'screen-proposal');
-                } else {
-                    document.getElementById('retry-message').innerText = "You are getting overfamiliarised! Try again.";
-                }
-            };
-            optionsDiv.appendChild(b);
+            b.className = 'btn'; b.innerText = o;
+            b.onclick = () => { step++; nextQ(); };
+            optBox.appendChild(b);
         });
-
-        clearInterval(timer);
-        timer = setInterval(() => {
-            timeLeft--;
-            document.getElementById('time').innerText = timeLeft;
-            if (timeLeft <= 0) {
-                currentStep++;
-                if (currentStep < scenarios.length) loadQuestion();
-                else transition('screen-game', 'screen-proposal');
-            }
-        }, 1000);
     }
 
-    function showLetter() {
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-        transition('screen-proposal', 'screen-letter');
-        document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('background.jpg')";
-        
-        const msg = "I love you, my Mama Qhawe. Words truly cannot express how much you mean to me, although I struggle sometimes to express it. I am so grateful for the journey we have travelled so far—the ups and downs, the highs and the lows. We have been through it all, and I am so glad that God has been on our side, allowing us to make it this far to our second Valentine’s Day. I see you, I appreciate you, and most importantly—NDOKUDA. I can't wait for the new chapter we have started together.";
+    document.getElementById('yes-btn').addEventListener('click', () => {
+        confetti({ particleCount: 150 });
+        show('screen-letter');
+        document.body.style.backgroundImage = "linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('background.jpg')";
         let i = 0;
-        const interval = setInterval(() => {
-            document.getElementById("typing-text").innerHTML += msg.charAt(i);
-            i++;
-            if (i >= msg.length) clearInterval(interval);
+        const type = setInterval(() => {
+            document.getElementById('typing-text').innerHTML += msg.charAt(i);
+            i++; if(i >= msg.length) clearInterval(type);
         }, 40);
-    }
+    });
 </script>
 </body>
 </html>
